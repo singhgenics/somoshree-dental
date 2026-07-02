@@ -8,682 +8,742 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --white:        #ffffff;
-      --off:          #faf8ff;
-      --border:       #e5e0f5;
-      --muted:        #64748b;
-      --body:         #1e1b33;
-      --accent:       #7c3aed;
-      --accent2:      #6d28d9;
-      --accent-light: #ede9fe;
-      --accent-xlight:#f5f3ff;
+      --cream:   #faf7f2;
+      --white:   #ffffff;
+      --ink:     #2b2118;
+      --muted:   #8a7d6f;
+      --border:  #eae3d8;
+      --rose:    #c2554f;
+      --rose2:   #a8433d;
+      --rose-lt: #f9ece9;
+      --sage:    #5f7161;
+      --gold:    #b98a2f;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: var(--body);
-      background: var(--white);
-      line-height: 1.6;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.65;
     }
 
-    /* NAV */
+    .sans {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--ink);
+      color: rgba(255,255,255,0.75);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      padding: 0.5rem 1.5rem;
+      flex-wrap: wrap;
+    }
+    .topbar strong { color: #fff; font-weight: 600; }
+    .topbar a { color: #e8b4b0; text-decoration: none; }
+
+    /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
+      position: sticky;
+      top: 0;
       z-index: 100;
-      background: transparent;
-      border-bottom: 1px solid transparent;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2.5rem;
-      height: 68px;
-      transition: background 0.3s, border-color 0.3s;
-    }
-    nav.scrolled {
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(12px);
-      border-color: var(--border);
+      padding: 1.1rem 3rem;
     }
 
     .nav-logo {
-      font-size: 1rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #fff;
       text-decoration: none;
-      transition: color 0.3s;
+      color: var(--ink);
+      line-height: 1.2;
     }
-    nav.scrolled .nav-logo { color: var(--body); }
-    .nav-logo span { color: #c4b5fd; }
-    nav.scrolled .nav-logo span { color: var(--accent); }
+    .nav-logo .logo-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      display: block;
+    }
+    .nav-logo .logo-sub {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--rose);
+      display: block;
+    }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.25rem;
       list-style: none;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
     .nav-links a {
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.85);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
       text-decoration: none;
-      transition: color 0.15s;
+      padding-bottom: 0.2rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
     }
-    nav.scrolled .nav-links a { color: var(--muted); }
-    .nav-links a:hover { color: #fff; }
-    nav.scrolled .nav-links a:hover { color: var(--body); }
+    .nav-links a:hover { color: var(--rose); border-color: var(--rose); }
 
     .nav-cta {
-      font-size: 0.875rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.78rem;
       font-weight: 600;
-      background: var(--accent);
-      color: #fff;
-      padding: 0.5rem 1.25rem;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: background 0.15s;
-    }
-    .nav-cta:hover { background: var(--accent2); }
-
-    /* HERO */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8rem 2rem 6rem;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      z-index: 0;
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        155deg,
-        rgba(30, 10, 60, 0.80) 0%,
-        rgba(109, 40, 217, 0.50) 55%,
-        rgba(0, 0, 0, 0.55) 100%
-      );
-      z-index: 1;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: #fff;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.28);
-      backdrop-filter: blur(8px);
-      padding: 0.35rem 1rem;
-      border-radius: 999px;
-      margin-bottom: 1.75rem;
-    }
-    .hero h1 {
-      font-size: clamp(2.25rem, 5.5vw, 3.75rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      color: #fff;
-      max-width: 740px;
-      margin-bottom: 1.25rem;
-    }
-    .hero h1 em { font-style: normal; color: #c4b5fd; }
-    .hero p {
-      font-size: 1.125rem;
-      color: rgba(255,255,255,0.8);
-      max-width: 500px;
-      margin-bottom: 2.5rem;
-      line-height: 1.7;
-    }
-    .hero-actions {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .btn-primary {
-      font-size: 0.9375rem;
-      font-weight: 600;
-      background: var(--accent);
-      color: #fff;
-      padding: 0.8rem 1.9rem;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: background 0.15s, transform 0.1s;
-    }
-    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
-    .btn-ghost {
-      font-size: 0.9375rem;
-      font-weight: 600;
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-      padding: 0.8rem 1.9rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.35);
-      backdrop-filter: blur(6px);
-      text-decoration: none;
-      transition: background 0.15s, transform 0.1s;
-    }
-    .btn-ghost:hover { background: rgba(255,255,255,0.22); transform: translateY(-1px); }
-    .hero-scroll {
-      position: absolute;
-      bottom: 2.5rem; left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      color: rgba(255,255,255,0.5);
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50%      { transform: translateX(-50%) translateY(6px); }
-    }
-
-    /* STATUS BAR */
-    .status-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      background: var(--body);
-      padding: 0.9rem 2rem;
-      font-size: 0.8125rem;
-      color: rgba(255,255,255,0.6);
-    }
-    .dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: #22c55e;
-      display: inline-block;
-      margin-right: 0.4rem;
-      box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
-    }
-    .status-bar strong { color: #fff; }
-
-    /* SECTION SHARED */
-    section { padding: 5.5rem 2rem; }
-    .container { max-width: 980px; margin: 0 auto; }
-    .section-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
+      background: var(--rose);
+      color: #fff;
+      padding: 0.7rem 1.5rem;
+      text-decoration: none;
+      transition: background 0.2s;
     }
-    .section-title {
-      font-size: clamp(1.6rem, 3vw, 2.1rem);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      margin-bottom: 0.9rem;
-    }
-    .section-sub {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.7;
-    }
+    .nav-cta:hover { background: var(--rose2); }
 
-    /* TRUST STRIP */
-    .trust-strip {
-      background: var(--accent-xlight);
-      border-bottom: 1px solid var(--accent-light);
-      padding: 1.25rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.875rem;
-      color: var(--body);
-      font-weight: 500;
-    }
-    .trust-item span:first-child { font-size: 1.2rem; }
-
-    /* SERVICES */
-    .services { background: var(--off); }
-    .services-feature {
-      margin-top: 3rem;
-      border-radius: 20px;
-      overflow: hidden;
-      height: 280px;
-      position: relative;
-    }
-    .services-feature img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center 40%;
-      display: block;
-    }
-    .services-feature-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(60,10,120,0.72) 0%, rgba(109,40,217,0.28) 60%, transparent 100%);
-      display: flex;
-      align-items: center;
-      padding: 2.5rem;
-    }
-    .services-feature-overlay blockquote { max-width: 400px; color: #fff; }
-    .services-feature-overlay blockquote p {
-      font-size: 1.2rem;
-      font-weight: 700;
-      line-height: 1.4;
-      margin-bottom: 0.5rem;
-    }
-    .services-feature-overlay blockquote cite {
-      font-size: 0.8125rem;
-      opacity: 0.75;
-      font-style: normal;
-    }
-    .services-grid {
+    /* ── HERO (split) ── */
+    .hero {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 1.25rem;
-      margin-top: 1.5rem;
+      grid-template-columns: 1.05fr 1fr;
+      min-height: calc(100vh - 110px);
     }
-    .service-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.15s;
-    }
-    .service-card:hover {
-      box-shadow: 0 8px 32px rgba(124,58,237,0.13);
-      transform: translateY(-3px);
-    }
-    .service-card-img {
-      width: 100%; height: 160px;
-      object-fit: cover;
-      display: block;
-    }
-    .service-card-body { padding: 1.4rem 1.5rem 1.5rem; }
-    .service-icon { font-size: 1.5rem; margin-bottom: 0.6rem; display: block; }
-    .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; }
-    .service-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
 
-    /* ABOUT */
-    .about-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    .about-text .section-sub { max-width: 420px; margin-top: 0.75rem; }
-    .about-highlights {
+    .hero-left {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
+      justify-content: center;
+      padding: 4rem 4rem 4rem 3rem;
     }
-    .highlight {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-    }
-    .highlight-icon {
-      flex-shrink: 0;
-      width: 36px; height: 36px;
-      background: var(--accent-light);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
-    }
-    .highlight-text strong { font-size: 0.9375rem; display: block; }
-    .highlight-text span { font-size: 0.8125rem; color: var(--muted); }
 
-    .doctor-photo-wrap {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      aspect-ratio: 4/5;
+    .hero-kicker {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--rose);
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 1.75rem;
     }
-    .doctor-photo-wrap img {
-      width: 100%; height: 100%;
+    .hero-kicker::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--rose);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 4.6vw, 3.9rem);
+      font-weight: 500;
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--rose);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-solid {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--ink);
+      color: var(--cream);
+      padding: 1rem 2.1rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-solid:hover { background: var(--rose); }
+
+    .link-arrow {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 0.25rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .link-arrow:hover { color: var(--rose); border-color: var(--rose); }
+
+    .hero-meta {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .hero-meta div span {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+    .hero-meta div strong {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .open-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #3a9d5d;
+      margin-right: 0.35rem;
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-right img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-frame {
+      position: absolute;
+      inset: 1.25rem;
+      border: 1px solid rgba(255,255,255,0.55);
+      pointer-events: none;
+    }
+    .hero-caption {
+      position: absolute;
+      bottom: 2.25rem;
+      left: 2.25rem;
+      right: 2.25rem;
+      background: rgba(43,33,24,0.82);
+      backdrop-filter: blur(8px);
+      color: var(--cream);
+      padding: 1.1rem 1.4rem;
+      font-style: italic;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .hero-caption span {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: block;
+      font-style: normal;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #e8b4b0;
+      margin-top: 0.4rem;
+    }
+
+    /* ── MARQUEE STRIP ── */
+    .strip {
+      background: var(--rose);
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 0.85rem 1.5rem;
+      flex-wrap: wrap;
+    }
+    .strip span { opacity: 0.92; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 3rem; }
+    .container { max-width: 1080px; margin: 0 auto; }
+
+    .sec-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .sec-kicker {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--rose);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .sec-kicker::before {
+      content: "";
+      width: 36px; height: 1px;
+      background: var(--rose);
+    }
+    .sec-title {
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      max-width: 480px;
+    }
+    .sec-title em { font-style: italic; color: var(--rose); }
+    .sec-note {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 340px;
+    }
+
+    /* ── SERVICES (numbered list) ── */
+    .services { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .service-rows { border-top: 1px solid var(--border); }
+    .service-row {
+      display: grid;
+      grid-template-columns: 70px 1.1fr 1.6fr 130px;
+      gap: 2rem;
+      align-items: center;
+      padding: 1.9rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .service-row:hover { background: var(--rose-lt); }
+
+    .srv-num {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .srv-name {
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .srv-desc {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .srv-img {
+      width: 130px;
+      height: 86px;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.9);
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .service-row:hover .srv-img { filter: saturate(1.1); transform: scale(1.03); }
+
+    /* ── ABOUT (editorial) ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 4.5rem;
+      align-items: center;
+    }
+
+    .about-photo {
+      position: relative;
+    }
+    .about-photo img {
+      width: 100%;
+      aspect-ratio: 3.4/4;
       object-fit: cover;
       object-position: center top;
       display: block;
     }
-    .doctor-name-badge {
+    .about-photo::after {
+      content: "";
       position: absolute;
-      bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
-      background: rgba(255,255,255,0.93);
-      backdrop-filter: blur(12px);
-      border-radius: 14px;
-      padding: 1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .badge-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      display: flex; align-items: center; justify-content: center;
-      color: white;
-      font-size: 0.85rem;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
-    .badge-info strong { font-size: 0.9375rem; display: block; }
-    .badge-info span { font-size: 0.8rem; color: var(--muted); }
-    .badge-stars { margin-left: auto; color: #f59e0b; font-size: 0.875rem; }
-
-    /* GALLERY */
-    .gallery { padding: 0; }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: 1fr 2fr 1fr;
-      grid-template-rows: 260px;
-    }
-    .gallery-wrap { overflow: hidden; }
-    .gallery-wrap img {
+      top: 1.25rem; left: -1.25rem;
       width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease, filter 0.3s;
-      filter: brightness(0.9);
+      border: 1px solid var(--rose);
+      z-index: -1;
     }
-    .gallery-wrap img:hover { transform: scale(1.04); filter: brightness(1); }
+    .about-photo-tag {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      background: var(--cream);
+      padding: 0.9rem 1.3rem;
+      border-left: 3px solid var(--rose);
+    }
+    .about-photo-tag strong { display: block; font-size: 1.05rem; font-weight: 600; }
+    .about-photo-tag span {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-    /* HOURS & CONTACT */
-    .contact { background: var(--off); }
-    .contact-grid {
+    .about-copy .drop {
+      font-size: 1.35rem;
+      line-height: 1.5;
+      font-style: italic;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .about-copy p.body-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 2.25rem;
+      max-width: 460px;
+    }
+
+    .about-points {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 3rem;
+      gap: 1.75rem 2rem;
     }
-    .info-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
+    .about-point {
+      border-top: 2px solid var(--ink);
+      padding-top: 0.9rem;
     }
-    .info-card h3 {
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
+    .about-point strong {
+      font-size: 1rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .about-point span {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.82rem;
       color: var(--muted);
-      margin-bottom: 1.25rem;
+      line-height: 1.55;
     }
-    .hours-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+
+    /* ── QUOTE BAND ── */
+    .quote-band {
+      position: relative;
+      overflow: hidden;
+      padding: 7rem 3rem;
+      text-align: center;
     }
+    .quote-band img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .quote-band::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(43,33,24,0.78);
+    }
+    .quote-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .quote-inner p {
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+    .quote-inner cite {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-style: normal;
+      font-size: 0.75rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #e8b4b0;
+    }
+
+    /* ── HOURS & CONTACT ── */
+    .visit { background: var(--white); border-top: 1px solid var(--border); }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+    }
+
+    .hours-table { border-top: 1px solid var(--border); }
     .hours-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      font-size: 0.875rem;
-      padding: 0.55rem 0;
+      align-items: baseline;
+      padding: 0.85rem 0.25rem;
       border-bottom: 1px solid var(--border);
     }
-    .hours-row:last-child { border-bottom: none; }
-    .hours-row .day { color: var(--body); font-weight: 500; }
-    .hours-row .time { color: var(--muted); }
-    .hours-row.today .day { color: var(--accent); font-weight: 700; }
-    .hours-row.today .time { color: var(--accent); font-weight: 600; }
-    .today-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 0.65rem;
-      font-weight: 700;
-      background: var(--accent-light);
-      color: var(--accent);
-      padding: 0.1rem 0.45rem;
-      border-radius: 999px;
-      margin-left: 0.4rem;
+    .hours-row .day {
+      font-size: 1.02rem;
+      font-weight: 500;
     }
-    .contact-items {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      text-decoration: none;
-      color: var(--body);
-      font-size: 0.9375rem;
-      transition: color 0.15s;
-    }
-    .contact-item:hover { color: var(--accent); }
-    .ci-icon {
-      width: 42px; height: 42px;
-      background: var(--accent-xlight);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.15rem;
-      flex-shrink: 0;
-      border: 1px solid var(--accent-light);
-    }
-
-    .map-embed {
-      margin-top: 2.5rem;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      height: 300px;
-      background: #ede9fe;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .map-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
+    .hours-row .time {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.85rem;
       color: var(--muted);
+      letter-spacing: 0.03em;
     }
-    .map-placeholder a {
-      display: inline-block;
-      margin-top: 0.5rem;
-      font-size: 0.875rem;
+    .hours-row.short .time { color: var(--rose); font-weight: 600; }
+
+    .visit-info { display: flex; flex-direction: column; gap: 0.5rem; }
+    .v-block {
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .v-block:first-child { padding-top: 0.5rem; }
+    .v-label {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.68rem;
       font-weight: 600;
-      color: var(--accent);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--rose);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .v-block a.big, .v-block .big {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--ink);
       text-decoration: none;
-      border: 1px solid var(--accent);
-      padding: 0.45rem 1.1rem;
-      border-radius: 999px;
-      transition: background 0.15s, color 0.15s;
+      transition: color 0.2s;
     }
-    .map-placeholder a:hover { background: var(--accent); color: #fff; }
+    .v-block a.big:hover { color: var(--rose); }
+    .v-block p {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+    .v-block a.map-link {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .v-block a.map-link:hover { color: var(--rose); border-color: var(--rose); }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
-      background: var(--body);
-      padding: 2.25rem 2rem;
+      background: var(--ink);
+      color: rgba(255,255,255,0.55);
+      padding: 3rem;
       text-align: center;
-      font-size: 0.8125rem;
-      color: rgba(255,255,255,0.4);
     }
-    footer strong { color: rgba(255,255,255,0.8); }
+    footer .f-name {
+      font-size: 1.3rem;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+    footer .f-sub {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #e8b4b0;
+      margin-bottom: 1.75rem;
+    }
+    footer .f-copy {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.78rem;
+    }
 
-    /* RESPONSIVE */
-    @media (max-width: 760px) {
-      nav { padding: 0 1.25rem; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 1rem 1.4rem; }
       .nav-links { display: none; }
-      .about-inner,
-      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 180px 180px;
+
+      .hero { grid-template-columns: 1fr; min-height: unset; }
+      .hero-left { padding: 3rem 1.5rem 2.5rem; }
+      .hero-right { min-height: 420px; }
+      .hero-meta { gap: 1.5rem; flex-wrap: wrap; }
+
+      section { padding: 4rem 1.5rem; }
+
+      .service-row {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+        padding: 1.6rem 0.25rem;
       }
-      .gallery-wrap:nth-child(2) { grid-column: 1 / -1; }
-      .services-feature { height: 200px; }
-      section { padding: 3.5rem 1.25rem; }
-      .hero { min-height: 90vh; }
-      .trust-strip { gap: 1.5rem; }
+      .srv-num { display: none; }
+      .srv-img { width: 100%; height: 150px; order: -1; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-photo::after { display: none; }
+      .about-points { grid-template-columns: 1fr; }
+
+      .visit-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .quote-band { padding: 5rem 1.5rem; }
     }
   </style>
 </head>
 <body>
 
+<!-- TOP BAR -->
+<div class="topbar">
+  <span><strong>Open today</strong> &middot; see hours below</span>
+  <span>Shiv Mandir, Bara Mohansingh, Siliguri 734011</span>
+  <a href="tel:06900396581">069003 96581</a>
+</div>
+
 <!-- NAV -->
-<nav id="main-nav">
-  <a class="nav-logo" href="#">Dr. <span>Somoshree</span> Paul</a>
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="logo-name">Dr. Somoshree Paul</span>
+    <span class="logo-sub">Dental Clinic &middot; Siliguri</span>
+  </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#visit">Visit</a></li>
   </ul>
-  <a class="nav-cta" href="tel:06900396581">Call Now</a>
+  <a class="nav-cta" href="tel:06900396581">Book a Visit</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <img
-    class="hero-bg"
-    src="https://images.pexels.com/photos/3845954/pexels-photo-3845954.jpeg?auto=compress&cs=tinysrgb&w=1800&q=80"
-    alt="Dr. Somoshree Paul Dental Clinic, Siliguri"
-  />
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-badge">&#9670; Dental Clinic &middot; Siliguri, West Bengal</div>
-    <h1>A Smile You'll<br/><em>Love to Show</em></h1>
-    <p>Caring, modern dental treatment in Siliguri from a trusted practitioner who puts your comfort first.</p>
+<header class="hero">
+  <div class="hero-left">
+    <div class="hero-kicker">Gentle Modern Dentistry</div>
+    <h1>Dentistry with a<br/><em>personal touch</em>, right here in Siliguri.</h1>
+    <p class="hero-desc">From routine check-ups to complete smile makeovers, Dr. Somoshree Paul treats every patient with unhurried, attentive care.</p>
     <div class="hero-actions">
-      <a class="btn-primary" href="tel:06900396581">Book an Appointment</a>
-      <a class="btn-ghost" href="#services">Our Services</a>
+      <a class="btn-solid" href="tel:06900396581">Book an Appointment</a>
+      <a class="link-arrow" href="#services">Explore Services &rarr;</a>
+    </div>
+    <div class="hero-meta">
+      <div>
+        <span>Status</span>
+        <strong><span class="open-dot"></span>Open Now</strong>
+      </div>
+      <div>
+        <span>Phone</span>
+        <strong>069003 96581</strong>
+      </div>
+      <div>
+        <span>Location</span>
+        <strong>Shiv Mandir, Siliguri</strong>
+      </div>
     </div>
   </div>
-  <div class="hero-scroll">&#8595; Scroll</div>
-</section>
+  <div class="hero-right">
+    <img
+      src="https://images.pexels.com/photos/3845954/pexels-photo-3845954.jpeg?auto=compress&cs=tinysrgb&w=1200&q=80"
+      alt="Dental care at Dr. Somoshree Paul's clinic"
+    />
+    <div class="hero-frame"></div>
+    <div class="hero-caption">
+      "Every patient deserves a dentist who listens before they treat."
+      <span>Dr. Somoshree Paul</span>
+    </div>
+  </div>
+</header>
 
-<!-- STATUS BAR -->
-<div class="status-bar">
-  <span><span class="dot"></span><strong>Open Now</strong> &middot; See hours below</span>
-  <span>&#128205; Shiv Mandir, Bara Mohansingh, Siliguri 734011</span>
-  <span>&#128222; <strong>069003 96581</strong></span>
-</div>
-
-<!-- TRUST STRIP -->
-<div class="trust-strip">
-  <div class="trust-item"><span>&#127775;</span><span>Gentle &amp; Caring</span></div>
-  <div class="trust-item"><span>&#128197;</span><span>Open 7 Days a Week</span></div>
-  <div class="trust-item"><span>&#129658;</span><span>Modern Equipment</span></div>
-  <div class="trust-item"><span>&#128106;</span><span>All Ages Welcome</span></div>
+<!-- STRIP -->
+<div class="strip">
+  <span>Open 7 Days</span>
+  <span>&#9670;</span>
+  <span>All Ages Welcome</span>
+  <span>&#9670;</span>
+  <span>Modern Equipment</span>
+  <span>&#9670;</span>
+  <span>Walk-ins Accepted</span>
 </div>
 
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="container">
-    <div class="section-tag">What We Offer</div>
-    <h2 class="section-title">Complete Dental Care</h2>
-    <p class="section-sub">From your first check-up to advanced cosmetic procedures, every treatment is delivered with care and precision.</p>
-
-    <div class="services-feature">
-      <img
-        src="https://images.pexels.com/photos/20301626/pexels-photo-20301626.jpeg?auto=compress&cs=tinysrgb&w=1400&q=80"
-        alt="Professional dental care"
-      />
-      <div class="services-feature-overlay">
-        <blockquote>
-          <p>"Every patient deserves a dentist who listens before they treat."</p>
-          <cite>— Dr. Somoshree Paul</cite>
-        </blockquote>
+    <div class="sec-head">
+      <div>
+        <div class="sec-kicker">Our Services</div>
+        <h2 class="sec-title">Complete care for <em>every smile</em></h2>
       </div>
+      <p class="sec-note sans">Six core treatments, one standard of care — thorough, gentle, and honest about what you actually need.</p>
     </div>
 
-    <div class="services-grid">
-      <div class="service-card">
-        <img class="service-card-img"
-          src="https://images.pexels.com/photos/14235198/pexels-photo-14235198.jpeg?auto=compress&cs=tinysrgb&w=600&h=360&fit=crop"
-          alt="General dentistry" />
-        <div class="service-card-body">
-          <span class="service-icon">&#129463;</span>
-          <h3>General Dentistry</h3>
-          <p>Thorough check-ups, professional cleanings, fillings, and preventive care for lifelong oral health.</p>
-        </div>
+    <div class="service-rows">
+      <div class="service-row">
+        <span class="srv-num">01</span>
+        <span class="srv-name">General Dentistry</span>
+        <span class="srv-desc">Check-ups, cleanings, fillings, and preventive care that keeps small problems from becoming big ones.</span>
+        <img class="srv-img" src="https://images.pexels.com/photos/14235198/pexels-photo-14235198.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="General dentistry" />
       </div>
-      <div class="service-card">
-        <img class="service-card-img"
-          src="https://images.pexels.com/photos/5622257/pexels-photo-5622257.jpeg?auto=compress&cs=tinysrgb&w=600&h=360&fit=crop"
-          alt="Teeth whitening" />
-        <div class="service-card-body">
-          <span class="service-icon">&#10024;</span>
-          <h3>Teeth Whitening</h3>
-          <p>Clinically safe whitening treatments that give you noticeably brighter results that last.</p>
-        </div>
+      <div class="service-row">
+        <span class="srv-num">02</span>
+        <span class="srv-name">Teeth Whitening</span>
+        <span class="srv-desc">Clinically safe whitening that delivers a noticeably brighter smile without damaging enamel.</span>
+        <img class="srv-img" src="https://images.pexels.com/photos/5622257/pexels-photo-5622257.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="Teeth whitening" />
       </div>
-      <div class="service-card">
-        <img class="service-card-img"
-          src="https://images.pexels.com/photos/6627471/pexels-photo-6627471.jpeg?auto=compress&cs=tinysrgb&w=600&h=360&fit=crop"
-          alt="Dental X-Rays" />
-        <div class="service-card-body">
-          <span class="service-icon">&#128247;</span>
-          <h3>Dental X-Rays</h3>
-          <p>Digital X-rays for fast, accurate diagnosis with minimum radiation exposure.</p>
-        </div>
+      <div class="service-row">
+        <span class="srv-num">03</span>
+        <span class="srv-name">Dental X-Rays</span>
+        <span class="srv-desc">Digital imaging for fast, precise diagnosis with minimal radiation exposure.</span>
+        <img class="srv-img" src="https://images.pexels.com/photos/6627471/pexels-photo-6627471.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="Dental X-rays" />
       </div>
-      <div class="service-card">
-        <img class="service-card-img"
-          src="https://images.pexels.com/photos/6627524/pexels-photo-6627524.jpeg?auto=compress&cs=tinysrgb&w=600&h=360&fit=crop"
-          alt="Root canal treatment" />
-        <div class="service-card-body">
-          <span class="service-icon">&#129504;</span>
-          <h3>Root Canal Treatment</h3>
-          <p>Painless root canal therapy that saves your natural tooth and restores full comfort.</p>
-        </div>
+      <div class="service-row">
+        <span class="srv-num">04</span>
+        <span class="srv-name">Root Canal Treatment</span>
+        <span class="srv-desc">Painless root canal therapy that saves your natural tooth and ends the discomfort for good.</span>
+        <img class="srv-img" src="https://images.pexels.com/photos/6627524/pexels-photo-6627524.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="Root canal treatment" />
       </div>
-      <div class="service-card">
-        <img class="service-card-img"
-          src="https://images.pexels.com/photos/6627325/pexels-photo-6627325.jpeg?auto=compress&cs=tinysrgb&w=600&h=360&fit=crop"
-          alt="Cosmetic dentistry" />
-        <div class="service-card-body">
-          <span class="service-icon">&#128512;</span>
-          <h3>Cosmetic Dentistry</h3>
-          <p>Veneers, bonding, and full smile makeovers tailored to look completely natural.</p>
-        </div>
+      <div class="service-row">
+        <span class="srv-num">05</span>
+        <span class="srv-name">Cosmetic Dentistry</span>
+        <span class="srv-desc">Veneers, bonding, and smile design shaped around your face — natural, never overdone.</span>
+        <img class="srv-img" src="https://images.pexels.com/photos/6627325/pexels-photo-6627325.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="Cosmetic dentistry" />
       </div>
-      <div class="service-card">
-        <img class="service-card-img"
-          src="https://images.pexels.com/photos/6627330/pexels-photo-6627330.jpeg?auto=compress&cs=tinysrgb&w=600&h=360&fit=crop"
-          alt="Pediatric dentistry" />
-        <div class="service-card-body">
-          <span class="service-icon">&#128118;</span>
-          <h3>Pediatric Dentistry</h3>
-          <p>Gentle, reassuring care for children that builds a positive relationship with dental health early on.</p>
-        </div>
+      <div class="service-row">
+        <span class="srv-num">06</span>
+        <span class="srv-name">Pediatric Dentistry</span>
+        <span class="srv-desc">Patient, reassuring care that helps children build a lifelong positive relationship with the dentist.</span>
+        <img class="srv-img" src="https://images.pexels.com/photos/6627330/pexels-photo-6627330.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="Pediatric dentistry" />
       </div>
     </div>
   </div>
@@ -692,131 +752,96 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="container">
-    <div class="about-inner">
-      <div class="about-text">
-        <div class="section-tag">About the Clinic</div>
-        <h2 class="section-title">Care You Can<br/>Trust in Siliguri</h2>
-        <p class="section-sub">Dr. Somoshree Paul brings a patient-first philosophy to every appointment, combining clinical expertise with a warm, reassuring approach that puts even anxious patients at ease.</p>
-        <div class="about-highlights">
-          <div class="highlight">
-            <div class="highlight-icon">&#127775;</div>
-            <div class="highlight-text">
-              <strong>Calm and Comfortable Environment</strong>
-              <span>Designed to ease anxiety and make every visit pleasant.</span>
-            </div>
-          </div>
-          <div class="highlight">
-            <div class="highlight-icon">&#128205;</div>
-            <div class="highlight-text">
-              <strong>Easy to Reach</strong>
-              <span>Shiv Mandir, Bara Mohansingh, Siliguri 734011.</span>
-            </div>
-          </div>
-          <div class="highlight">
-            <div class="highlight-icon">&#128197;</div>
-            <div class="highlight-text">
-              <strong>Open All Week</strong>
-              <span>Morning to evening, Monday through Sunday.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="doctor-photo-wrap">
+    <div class="about-grid">
+      <div class="about-photo">
         <img
-          src="https://images.pexels.com/photos/16430838/pexels-photo-16430838.jpeg?auto=compress&cs=tinysrgb&w=700&h=875&fit=crop"
+          src="https://images.pexels.com/photos/16430838/pexels-photo-16430838.jpeg?auto=compress&cs=tinysrgb&w=800&q=80"
           alt="Dr. Somoshree Paul, Dentist, Siliguri"
         />
-        <div class="doctor-name-badge">
-          <div class="badge-avatar">SP</div>
-          <div class="badge-info">
-            <strong>Dr. Somoshree Paul</strong>
-            <span>BDS &middot; Siliguri, West Bengal</span>
+        <div class="about-photo-tag">
+          <strong>Dr. Somoshree Paul</strong>
+          <span>BDS &middot; Siliguri, West Bengal</span>
+        </div>
+      </div>
+      <div class="about-copy">
+        <div class="sec-kicker">About the Practice</div>
+        <h2 class="sec-title" style="margin-bottom:1.75rem">Care you can <em>trust</em></h2>
+        <p class="drop">A patient-first philosophy at every appointment — clinical expertise delivered with a warm, reassuring approach.</p>
+        <p class="body-text">Located at Shiv Mandir in Bara Mohansingh, the clinic welcomes families from across Siliguri. Even the most anxious patients leave feeling they were heard, not hurried.</p>
+        <div class="about-points">
+          <div class="about-point">
+            <strong>Calm Environment</strong>
+            <span>A practice designed to ease anxiety and make every visit pleasant.</span>
           </div>
-          <div class="badge-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+          <div class="about-point">
+            <strong>Open All Week</strong>
+            <span>Morning to evening hours, Monday through Sunday.</span>
+          </div>
+          <div class="about-point">
+            <strong>Honest Treatment</strong>
+            <span>Clear explanations and only the treatment you genuinely need.</span>
+          </div>
+          <div class="about-point">
+            <strong>Central Location</strong>
+            <span>Easy to reach at Shiv Mandir, Bara Mohansingh, Siliguri.</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- GALLERY STRIP -->
-<div class="gallery">
-  <div class="gallery-grid">
-    <div class="gallery-wrap">
-      <img
-        src="https://images.pexels.com/photos/7800669/pexels-photo-7800669.jpeg?auto=compress&cs=tinysrgb&w=500&h=520&fit=crop"
-        alt="Dental consultation"
-      />
-    </div>
-    <div class="gallery-wrap">
-      <img
-        src="https://images.pexels.com/photos/7800666/pexels-photo-7800666.jpeg?auto=compress&cs=tinysrgb&w=900&h=520&fit=crop"
-        alt="Dental team at work"
-      />
-    </div>
-    <div class="gallery-wrap">
-      <img
-        src="https://images.pexels.com/photos/6627447/pexels-photo-6627447.jpeg?auto=compress&cs=tinysrgb&w=500&h=520&fit=crop"
-        alt="Dental procedure"
-      />
-    </div>
+<!-- QUOTE BAND -->
+<div class="quote-band">
+  <img
+    src="https://images.pexels.com/photos/7800666/pexels-photo-7800666.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80"
+    alt="Dental team at work"
+  />
+  <div class="quote-inner">
+    <p>"A healthy smile isn't a luxury. It's something every family in Siliguri deserves."</p>
+    <cite>Dr. Somoshree Paul</cite>
   </div>
 </div>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
+<!-- VISIT -->
+<section class="visit" id="visit">
   <div class="container">
-    <div class="section-tag">Find Us</div>
-    <h2 class="section-title">Hours &amp; Contact</h2>
-    <p class="section-sub">Walk-ins welcome. Give us a call to book your preferred slot.</p>
-
-    <div class="contact-grid">
-      <div class="info-card">
-        <h3>Opening Hours</h3>
-        <ul class="hours-list">
-          <li class="hours-row"><span class="day">Monday</span><span class="time">10 am – 7:30 pm</span></li>
-          <li class="hours-row"><span class="day">Tuesday</span><span class="time">10 am – 5:30 pm</span></li>
-          <li class="hours-row"><span class="day">Wednesday</span><span class="time">10 am – 7:30 pm</span></li>
-          <li class="hours-row today"><span class="day">Thursday <span class="today-pill">Today</span></span><span class="time">10 am – 7:30 pm</span></li>
-          <li class="hours-row"><span class="day">Friday</span><span class="time">10 am – 7:30 pm</span></li>
-          <li class="hours-row"><span class="day">Saturday</span><span class="time">10 am – 7:30 pm</span></li>
-          <li class="hours-row"><span class="day">Sunday</span><span class="time">10 am – 2 pm</span></li>
-        </ul>
+    <div class="sec-head">
+      <div>
+        <div class="sec-kicker">Plan Your Visit</div>
+        <h2 class="sec-title">Hours &amp; <em>directions</em></h2>
       </div>
-      <div class="info-card">
-        <h3>Get in Touch</h3>
-        <div class="contact-items">
-          <a class="contact-item" href="tel:06900396581">
-            <div class="ci-icon">&#128222;</div>
-            <div>
-              <strong>069003 96581</strong><br/>
-              <span style="font-size:0.8125rem;color:var(--muted)">Tap to call directly</span>
-            </div>
-          </a>
-          <a class="contact-item" href="https://maps.google.com/?q=P946+QH+Siliguri,+West+Bengal" target="_blank" rel="noopener">
-            <div class="ci-icon">&#128205;</div>
-            <div>
-              <strong>Shiv Mandir, Bara Mohansingh</strong><br/>
-              <span style="font-size:0.8125rem;color:var(--muted)">Siliguri, West Bengal 734011</span>
-            </div>
-          </a>
-          <div class="contact-item">
-            <div class="ci-icon">&#128336;</div>
-            <div>
-              <strong>Mon to Sat: 10 am – 7:30 pm</strong><br/>
-              <span style="font-size:0.8125rem;color:var(--muted)">Sunday: 10 am – 2 pm</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <p class="sec-note sans">Walk-ins are welcome, but a quick call ahead guarantees your slot.</p>
     </div>
 
-    <div class="map-embed">
-      <div class="map-placeholder">
-        <span style="font-size:2.5rem">&#128205;</span>
-        <strong style="color:var(--body);font-size:1rem">Dr. Somoshree Paul — Dental Clinic</strong>
-        <span>Shiv Mandir, Bara Mohansingh, Siliguri, WB 734011</span>
-        <a href="https://maps.google.com/?q=P946+QH+Siliguri,+West+Bengal" target="_blank" rel="noopener">Open in Google Maps</a>
+    <div class="visit-grid">
+      <div class="hours-table">
+        <div class="hours-row"><span class="day">Monday</span><span class="time">10 am – 7:30 pm</span></div>
+        <div class="hours-row short"><span class="day">Tuesday</span><span class="time">10 am – 5:30 pm</span></div>
+        <div class="hours-row"><span class="day">Wednesday</span><span class="time">10 am – 7:30 pm</span></div>
+        <div class="hours-row"><span class="day">Thursday</span><span class="time">10 am – 7:30 pm</span></div>
+        <div class="hours-row"><span class="day">Friday</span><span class="time">10 am – 7:30 pm</span></div>
+        <div class="hours-row"><span class="day">Saturday</span><span class="time">10 am – 7:30 pm</span></div>
+        <div class="hours-row short"><span class="day">Sunday</span><span class="time">10 am – 2 pm</span></div>
+      </div>
+
+      <div class="visit-info">
+        <div class="v-block">
+          <span class="v-label">Call the Clinic</span>
+          <a class="big" href="tel:06900396581">069003 96581</a>
+          <p>Tap to call directly from your phone.</p>
+        </div>
+        <div class="v-block">
+          <span class="v-label">Find Us</span>
+          <span class="big">Shiv Mandir, Bara Mohansingh</span>
+          <p>Siliguri, West Bengal 734011 &middot; Plus code P946+QH</p>
+          <a class="map-link" href="https://maps.google.com/?q=P946+QH+Siliguri,+West+Bengal" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
+        </div>
+        <div class="v-block">
+          <span class="v-label">Good to Know</span>
+          <span class="big">Open every day</span>
+          <p>Shorter hours on Tuesday (till 5:30 pm) and Sunday (till 2 pm).</p>
+        </div>
       </div>
     </div>
   </div>
@@ -824,15 +849,10 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2026 <strong>Dr. Somoshree Paul</strong> &middot; Dental Clinic, Siliguri, West Bengal &middot; All rights reserved.</p>
+  <div class="f-name">Dr. Somoshree Paul</div>
+  <div class="f-sub">Dental Clinic &middot; Siliguri</div>
+  <div class="f-copy">&copy; 2026 Dr. Somoshree Paul &middot; Shiv Mandir, Bara Mohansingh, Siliguri, West Bengal 734011 &middot; All rights reserved.</div>
 </footer>
-
-<script>
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-</script>
 
 </body>
 </html>
